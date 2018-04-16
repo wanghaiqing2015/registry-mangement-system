@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+    {% set next_order = "desc" if order == "asc" else "asc" %}
+    {% if order == "asc" %}
+        {% set order_icon = '<span class="order-icon glyphicon glyphicon-chevron-up"></span>' %}
+    {% else %}
+        {% set order_icon = '<span class="order-icon glyphicon glyphicon-chevron-down"></span>' %}
+    {% end %}
+    <div id="processes" class="box">
+        <div class="box-header">
+            <small style="font-size:20px;font-weight:300;color:#808080;padding:10px 0" class="pull-left">镜像</small>
+            <small style="font-size:20px;font-weight:300;color:#808080;padding:10px 0" class="pull-right">找到 {{num_images}} 个镜像</small>
+        </div>
+        <div class="box-content">
+ 
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>
+                            序号
+                        </th>  
+                        <th>
+                            <a href="{{ reverse_url("images", 'name', next_order) }}">镜像名称</a>
+                            {% if sort == "name" %}   {% raw order_icon %}   {% end %}
+                        </th>
+                        <th>
+                            <a href="{{ reverse_url("images", 'num_labels', next_order) }}">标签个数</a>
+                            {% if sort == "num_labels" %}   {% raw order_icon %}   {% end %}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, image in enumerate(images) %}
+                        <tr>
+                          <td>{{index+1}}</td>
+                          <td>
+                            <a href="{{ reverse_url("labels", image['name'] ) }}">{{image['name']}}</a>
+                          </td>
+                          <td>{{image['num_labels']}}</td>
+                        </tr>
+                    {% end %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% end %}
+  

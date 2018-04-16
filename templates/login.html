@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <style>
+        .main-content {
+          padding-top: 80px;
+          padding-left: 100px;
+          padding-right: 100px;
+          border: 0;
+          background-color: transparent;
+        }
+    </style>
+{% end %}
+    
+{% block content %}
+    <div id="processes" class="box">
+        <div class="col-md-4 col-lg-offset-4">
+ 
+            <form class="form-horizontal" role="form" method="post" action="{{ reverse_url('login') }}">
+                {% module xsrf_form_html() %}
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" >地址 *</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                            <input class="form-control" id="url" name="url" placeholder="仓库地址，例如：103.45.6.163:5000" required="" type="text" value="" autofocus>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" >用户名 *</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                            <input class="form-control" id="username" name="username" placeholder="用户名" required="" type="text" value="" autofocus>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label" >密码 *</label>
+                    <div class="col-sm-9">
+                        <div class="input-group">
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                            <input class="form-control" id="password" name="password" placeholder="密码" required="" type="password" value="">
+                        </div>
+                    </div>
+                </div>
+                
+                {% try %}
+                    {% if message %}
+                        <p style='margin-top: 15px;text-align:center'class="text-danger">{{ message }}</p>
+                    {% else %}
+                        <br>
+                    {% end %}
+                {% except %} 
+                    <br>
+                {% end %}
+ 
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <button type="submit" class="btn btn-default">登录</button>
+                    </div>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <script>
+        function get_cookie(name) {
+            var xsrf_cookies = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+            return xsrf_cookies[1]
+        }
+        
+    </script>
+{% end %}
+  

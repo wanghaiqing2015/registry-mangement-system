@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+
+{% block header %}
+    <style>
+        .main-content {
+          padding-top: 80px;
+          padding-left: 100px;
+          padding-right: 100px;
+          border: 0;
+          background-color: transparent;
+        }
+    </style>
+{% end %}
+    
+{% block content %}
+    <div id="processes" class="box">
+        <div class="box-header">
+            <small style="font-size:20px;font-weight:300;color:#808080;padding:10px 0" class="pull-left">标签</small>
+        </div>
+        <div class="box-content">
+ 
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>序号</th>  
+                        <th>标签名称</th>
+                        <th>作者</th>
+                        <th>架构</th>
+                        <th>Docker版本</th>
+                        <th>入口命令</th>
+                        <th>端口</th>
+                        <th>创建时间</th>
+                        <th>镜像ID</th>
+                        <th>卷</th>
+                        <th>执行目录</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for index, label in enumerate(labels) %}
+                        <tr>
+                          <td>{{index+1}}</td>
+                          <td>{{label['name']}}</td>
+                          <td>{{label['author']}}</td>
+                          <td>{{label['architecture']}}</td>
+                          <td>{{label['docker_version']}}</td>
+                          <td>{{label['Cmd']}}</td>
+                          <td>{{label['ExposedPorts']}}</td>
+                          <td>{{label['created'].split('.')[0]}}</td>
+                          <td>{{label['id']}}</td>
+                          <td>{{label['Volumes']}}</td>
+                          <td>{{label['WorkingDir']}}</td>
+                          <td>
+                            <button class="btn btn-danger btn-sm" 
+                            
+                            data-image="{{label['image']}}" 
+                            data-tag="{{label['name']}}" 
+                            
+                            onclick='delete_label(this)'>
+                                <span>删除</span>
+                            </button>
+                          </td>
+                        </tr>
+                    {% end %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        function get_cookie(name) {
+            var xsrf_cookies = document.cookie.match("\\b" + name + "=([^;]*)\\b");
+            return xsrf_cookies[1]
+        }
+        
+        function delete_label(obj){
+            var this_button = $(obj)
+            var image = this_button.attr('data-image')
+            var tag = this_button.attr('data-tag')
+
+            $.ajax({
+                    'headers':{
+                        "X-XSRFTOKEN":get_cookie("_xsrf")
+                    },
+                    'url': '/delete_label/',
+                    'type': 'delete',
+                    'data':  {
+                                'image':image,
+                                'tag':tag,
+                             } ,
+                    'success':function (XMLHttpRequest, textStatus){
+                        if (XMLHttpRequest.status==true){
+                            alert("删除评论成功！")
+                            self.location.reload();
+                        }else{
+                            alert("删除评论失败！")
+                        }
+
+                    },
+                })
+        }
+    </script>
+{% end %}
+  

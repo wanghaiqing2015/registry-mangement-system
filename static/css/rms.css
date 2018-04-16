@@ -1,0 +1,40 @@
+ 
+ .table-container .content .main-content div.box .box-header {
+    margin-bottom: 10px;
+}
+
+ .table-container .content .main-content div.box .box-header span {
+    font-size: 20px;
+    font-weight: 300;
+    color: #808080;
+    padding: 10px 0;
+}
+ 
+ table th {
+    padding: 13px 6px;
+    font-size: 16px;
+    font-weight: 300;
+    margin-right: 10px;
+}
+
+ table th a {
+    font-size: 16px;
+    font-weight: 300;
+    margin-right: 10px;
+}
+
+ table td {
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+ table td a {
+    font-size: 16px;
+    font-weight: 300;
+}
+
+ table td small {
+    font-size: 11px;
+    color: #868686;
+}
+ 
