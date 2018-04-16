@@ -9,7 +9,7 @@ COPY ./static/  /rms/static
 COPY ./templates/  /rms/templates
 WORKDIR /rms
  
-EXPOSE 50000
+EXPOSE 15000
 CMD /rms/rms
 EOF
 
@@ -25,5 +25,9 @@ docker rmi rms
 docker build -t rms   .
 docker images
 docker save -o rms-latest.tar rms:latest
-docker run -itd  --restart=always --name rms -p 50000:50000 rms
+ 
+docker tag rms:latest index.tenxcloud.com/krman/rms:latest
+docker push index.tenxcloud.com/krman/rms:latest
+
+docker run -itd  --restart=always --name rms -p 15000:15000 index.tenxcloud.com/krman/rms:latest
 

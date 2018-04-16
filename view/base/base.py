@@ -34,6 +34,12 @@ class BaseHandler(SessionBaseHandler):
             self.username = self.session["registry_username"]
             self.password = self.session["registry_password"]
             self.url = self.session["registry_url"]
+        if 'registry_url' in self.session:
+            self.registry_url = self.session["registry_url"]
+            if 'http' in self.registry_url:
+                self.registry_url = self.session["registry_url"].split('://')[1]
+        else:
+            self.registry_url = self.request.headers['Host']
  
     @tornado.gen.coroutine
     def on_finish(self):

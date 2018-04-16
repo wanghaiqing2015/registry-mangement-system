@@ -2,7 +2,7 @@
 
 ### 源码编译， 需要安装Python3.6.4
 
-- ​        bash install/install_python3.sh
+- ​        bash build_python3.sh
 
 ### 源码编译并安装 rms
 
@@ -11,12 +11,12 @@
 ### 直接拉取镜像
 
 ```shell
-docker run -itd  --restart=always -p 50000:50000 index.tenxcloud.com/krman/rms:latest
+docker run -itd  --restart=always -p 15000:15000 index.tenxcloud.com/krman/rms:latest
 ```
 
 ### 管理界面访问
 
-- ​        http://103.45.6.163:50000/
+- ​        http://103.45.6.163:15000/
 
   ​
 

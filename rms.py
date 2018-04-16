@@ -14,7 +14,7 @@ log_config.init( )  # 必须放在app初始化的前面， 否则别的模块识
  
 from application import Application
  
-define("port", default=50000, help="run on the given port", type=int)
+define("port", default=15000, help="run on the given port", type=int)
  
 if __name__=='__main__':  
     tornado.options.parse_command_line()
@@ -34,7 +34,7 @@ if __name__=='__main__':
     print('service start running on 0.0.0.0:{0}'.format(options.port))
     
     try:
-        url = "http://127.0.0.1:50000/"
+        url = "http://127.0.0.1:15000/"
         server.add_callback(webbrowser.open, url)
     except:
         pass

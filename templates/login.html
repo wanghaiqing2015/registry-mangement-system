@@ -19,11 +19,11 @@
             <form class="form-horizontal" role="form" method="post" action="{{ reverse_url('login') }}">
                 {% module xsrf_form_html() %}
                 <div class="form-group">
-                    <label class="col-sm-3 control-label" >地址 *</label>
+                    <label class="col-sm-3 control-label" >仓库地址 *</label>
                     <div class="col-sm-9">
                         <div class="input-group">
-                            <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                            <input class="form-control" id="url" name="url" placeholder="仓库地址，例如：103.45.6.163:5000" required="" type="text" value="" autofocus>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-star"></span></span>
+                            <input class="form-control" id="url" name="url" placeholder="仓库地址，例如：103.45.6.163:5000" required="" type="text" value="{{handler.registry_url}}" autofocus>
                         </div>
                     </div>
                 </div>
@@ -32,7 +32,7 @@
                     <div class="col-sm-9">
                         <div class="input-group">
                             <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
-                            <input class="form-control" id="username" name="username" placeholder="用户名" required="" type="text" value="" autofocus>
+                            <input class="form-control" id="username" name="username" placeholder="用户名" required="" type="text" value="">
                         </div>
                     </div>
                 </div>
