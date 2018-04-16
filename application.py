@@ -25,6 +25,9 @@ class Application(tornado.web.Application):
                 'force_persistence':True,
                 'sid_name':'torndsessionID',
                 'session_lifetime':60*60*24*7,
+                'cookie_config': {
+                    'expires_days': 7,  # 优先级其次
+                },
             },
         )
         tornado.web.Application.__init__(self, **settings)
