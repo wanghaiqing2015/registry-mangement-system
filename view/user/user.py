@@ -24,6 +24,10 @@ class LoginHandler(BaseHandler):
         if 'http' not in self.url:
             self.url = 'http://'+self.url
             
+        print(self.url)
+        print(self.username)
+        print(self.password)
+        
         try:
             r = requests.get(self.url+'/v2/', auth=(self.username, self.password), timeout=3)
             
@@ -35,7 +39,8 @@ class LoginHandler(BaseHandler):
                 self.redirect(self.reverse_url('main-images'))
             else:
                 self.render("login.html", message="无法连接到镜像仓库！")
-        except :
+        except Exception as e:
+            print(e)
             self.render("login.html", message="无法连接到镜像仓库！")
             
 class LogoutHandler(BaseHandler):
