@@ -17,25 +17,20 @@ class LoginHandler(BaseHandler):
     def post(self):
         self.username = self.get_argument('username').strip()
         self.password = self.get_argument('password') 
-        self.url = self.get_argument('url').strip()
-        if not self.url:
-            self.url = '127.0.0.1:5000' 
-        
-        if 'http' not in self.url:
-            self.url = 'http://'+self.url
-            
-        print(self.url)
-        print(self.username)
-        print(self.password)
-        
+ 
         try:
             r = requests.get(self.url+'/v2/', auth=(self.username, self.password), timeout=3)
-            
             if r.status_code==200:
-                self.session["registry_username"] = self.username
-                self.session["registry_password"] = self.password
+                if self.username:
+                    self.session["registry_username"] = self.username
+                    self.session["registry_password"] = self.password
+                    self.session["user"] = self.username
+                else:
+                    self.session["registry_username"] = "anonymous"
+                    self.session["registry_password"] = "anonymous"
+                    self.session["user"] = "anonymous"
+                    
                 self.session["registry_url"] = self.url
-                self.session["user"] = self.username
                 self.redirect(self.reverse_url('main-images'))
             else:
                 self.render("login.html", message="无法连接到镜像仓库！")

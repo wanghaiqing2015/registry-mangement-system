@@ -29,12 +29,12 @@ class LabelHandler(BaseHandler):
             i['architecture'] = label['architecture']
             i['author'] = label['auther'] if 'auther' in label else ''
             i['docker_version'] = label['docker_version']
-            i['Cmd'] = label['config']['Cmd']
-            i['ExposedPorts'] = label['config']['ExposedPorts']
+            i['Cmd'] = label['config']['Cmd'] if 'Cmd' in label['config'] else ''
+            i['ExposedPorts'] = label['config']['ExposedPorts'] if 'ExposedPorts' in label['config'] else ''
             i['created'] = label['created']
             i['id'] = label['id'][0:12]
-            i['Volumes'] = label['config']['Volumes'] 
-            i['WorkingDir'] = label['config']['WorkingDir'] 
+            i['Volumes'] = label['config']['Volumes'] if 'Volumes' in label['config'] else ''
+            i['WorkingDir'] = label['config']['WorkingDir'] if 'WorkingDir' in label['config'] else ''
             i['image'] =  image
             
         data = {

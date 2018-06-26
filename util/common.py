@@ -5,13 +5,13 @@ logger = logging.getLogger(__name__)
 
 def get_images_list(self):
     r = requests.get(self.url+'/v2/_catalog', auth=(self.username, self.password))
-    return r.json()['repositories']
+    return r.json()['repositories'] if 'repositories' in r.json() else []
     
 def get_labels_list(self, image):
     r = requests.get(self.url+'/v2/%s/tags/list'%image, auth=(self.username, self.password))
-    tags = r.json()['tags']
+    tags = r.json()['tags'] if 'tags' in r.json() else []
     return tags if tags else []
-    
+ 
 def get_label(self, image, tag):
     r = requests.get(self.url+'/v2/%s/manifests/%s'%(image, tag), auth=(self.username, self.password) )
  

@@ -6,15 +6,15 @@ pid = os.getpid()
 
 '''
 if system() == 'Windows':
-    log_path = r"C:\docker\%s_%s"%(current_time, pid)
+    log_path = r"C:\rms\%s_%s"%(current_time, pid)
 else:
-    log_path = "/var/log/docker/%s_%s"%(current_time, pid)
+    log_path = "/var/log/rms/%s_%s"%(current_time, pid)
 '''
 
 if system() == 'Windows':
-    log_path = r"C:\docker\tornado" 
+    log_path = r"C:\rms\tornado" 
 else:
-    log_path = "/var/log/docker/tornado" 
+    log_path = "/var/log/rms/tornado" 
     
 FILE = dict(
     log_path=log_path, # 末尾自动添加 @端口号.txt_日期
@@ -27,9 +27,9 @@ FILE = dict(
 def init(console_handler=True, file_handler=True, log_path=FILE['log_path'], base_level="INFO"):
     try:
         if system() == 'Windows':
-            os.makedirs(r"C:\docker")
+            os.makedirs(r"C:\rms")
         else:
-            os.makedirs(r"/var/log/docker")
+            os.makedirs(r"/var/log/rms")
     except:
         pass
     

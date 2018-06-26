@@ -29,18 +29,12 @@ class BaseHandler(SessionBaseHandler):
         logger.info("   method      : " + self.request.method)
         logger.info("   uri         : " + self.request.uri)
         logger.info("   time        : " + time.strftime("%Y-%m-%d %H:%M:%S ",time.localtime(time.time())))
-        
-        if self.get_current_user():
+ 
+        if self.get_current_user() or self.get_current_user() =="":
             self.username = self.session["registry_username"]
             self.password = self.session["registry_password"]
-            self.url = self.session["registry_url"]
-        if 'registry_url' in self.session:
-            self.registry_url = self.session["registry_url"]
-            if 'http' in self.registry_url:
-                self.registry_url = self.session["registry_url"].split('://')[1]
-        else:
-            self.registry_url = self.request.headers['Host']
- 
+        self.url = 'http://127.0.0.1:5000'
+            
     @tornado.gen.coroutine
     def on_finish(self):
         pass

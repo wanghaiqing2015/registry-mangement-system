@@ -24,10 +24,6 @@
                             <a href="{{ reverse_url("images", 'name', next_order) }}">镜像名称</a>
                             {% if sort == "name" %}   {% raw order_icon %}   {% end %}
                         </th>
-                        <th>
-                            <a href="{{ reverse_url("images", 'num_labels', next_order) }}">标签个数</a>
-                            {% if sort == "num_labels" %}   {% raw order_icon %}   {% end %}
-                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,7 +33,6 @@
                           <td>
                             <a href="{{ reverse_url("labels", image['name'] ) }}">{{image['name']}}</a>
                           </td>
-                          <td>{{image['num_labels']}}</td>
                         </tr>
                     {% end %}
                 </tbody>

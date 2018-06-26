@@ -21,11 +21,7 @@ class IndexHandler(BaseHandler):
     def asynchronous(self):
         images = get_images_list(self)
         images = [{'name':i} for i in images]
-        
-        for i in images:
-            labels = get_labels_list(self, i['name'])
-            i['num_labels'] = len(labels)
-            
+    
         images.sort(
             key=lambda x: x.get(self.sort),
             reverse=True if self.order != 'asc' else False
