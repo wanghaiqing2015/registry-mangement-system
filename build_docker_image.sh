@@ -2,7 +2,8 @@ cat >  ./Dockerfile << EOF
 FROM frolvlad/alpine-glibc
 MAINTAINER whq <krman@163.com>
 
-RUN apk add --update bash --repository http://mirrors.ustc.edu.cn/alpine/v3.7/main/ --allow-untrusted
+RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositories
+RUN apk add --update-cache bash  
 RUN rm -rf /var/cache/apk/* 
 COPY ./dist/rms  /rms
 WORKDIR /rms
